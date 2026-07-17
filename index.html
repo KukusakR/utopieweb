@@ -179,7 +179,7 @@
       backdrop-filter: blur(12px);
     }
     .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warning); box-shadow: 0 0 0 5px rgba(255,205,106,.1); }
-    .hero h1 { max-width: 700px; margin-bottom: 24px; font-size: clamp(4rem, 10vw, 8.4rem); line-height: .78; letter-spacing: -.065em; text-transform: uppercase; }
+    .hero h1 { max-width: 700px; margin-bottom: 24px; font-size: clamp(4rem, 9vw, 7.4rem); line-height: .82; letter-spacing: -.065em; text-transform: uppercase; }
     .hero h1 span { display: block; color: transparent; -webkit-text-stroke: 1.5px rgba(255,236,76,.72); text-shadow: 0 0 42px rgba(255,193,0,.16); }
     .hero-copy { max-width: 570px; margin-bottom: 30px; color: #c1bbd1; font-size: clamp(1rem, 1.7vw, 1.15rem); line-height: 1.7; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -231,7 +231,7 @@
     .portal-ring::before, .portal-ring::after { content: ""; position: absolute; border-radius: inherit; }
     .portal-ring::before { inset: 14px; border: 1px dashed rgba(255,255,255,.46); animation: spin 18s linear infinite; }
     .portal-ring::after { inset: 35px; background: radial-gradient(circle, rgba(255,255,255,.8), rgba(255,229,0,.42) 4%, rgba(255,133,0,.09) 32%, rgba(8,8,5,.88) 70%); box-shadow: inset 0 0 55px rgba(255,229,0,.13); }
-    .showcase-logo { position: absolute; z-index: 3; left: 50%; top: 42%; width: min(72%, 360px); transform: translate(-50%,-50%); filter: drop-shadow(0 18px 30px rgba(0,0,0,.55)); }
+    .showcase-logo { position: absolute; z-index: 3; left: 50%; top: 42%; width: 142px; aspect-ratio: 1; object-fit: cover; transform: translate(-50%,-50%); border: 1px solid rgba(255,229,0,.28); border-radius: 30px; box-shadow: 0 18px 45px rgba(0,0,0,.58), 0 0 38px rgba(255,229,0,.15); }
     @keyframes spin { to { transform: rotate(360deg); } }
     .portal-floor { position: absolute; left: 50%; bottom: 0; width: 130%; height: 36%; transform: translateX(-50%) perspective(340px) rotateX(65deg); background-image: linear-gradient(rgba(255,229,0,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(255,229,0,.13) 1px, transparent 1px); background-size: 32px 32px; mask-image: linear-gradient(to top, black, transparent); }
     .card-label { position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; justify-content: space-between; align-items: end; }
@@ -442,28 +442,28 @@
         <path d="M0 430h800" stroke="#ffb000" stroke-width="3" opacity=".7"/>
       </svg>
       <div class="container hero-content">
-        <div class="status-pill"><span class="status-dot"></span> Na serveru právě makáme</div>
-        <h1>MĚSTO, KTERÉ <span>TVOŘÍME SPOLU.</span></h1>
-        <p class="hero-copy">Utopii stavíme jako server, na který se sami chceme každý večer vracet. Poctivé RP, normální lidi a tým, který hráčům opravdu naslouchá.</p>
+        <div class="status-pill"><span class="status-dot"></span> Server je zatím ve vývoji</div>
+        <h1>DĚLÁME UTOPII. <span>POŘÁDNĚ.</span></h1>
+        <p class="hero-copy">Utopie RP je CZ/SK FiveM server, na kterém právě pracujeme. Chceme dobré RP, rozumná pravidla a prostředí, kde se dá normálně domluvit. Novinky i testování řešíme hlavně na Discordu.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#pripojit">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 12h8m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
-            Chci být u toho
+            Přidat se na Discord
           </a>
-          <a class="btn btn-ghost" href="#pravidla">Prozkoumat pravidla</a>
+          <a class="btn btn-ghost" href="#pravidla">Nejdřív pravidla</a>
         </div>
         <div class="hero-meta">
-          <div><strong>WL-OFF</strong><span>Bez pohovoru</span></div>
-          <div><strong>64</strong><span>Slotů</span></div>
-          <div><strong>CZ / SK</strong><span>Komunita</span></div>
+          <div><strong>WL-OFF</strong><span>Bez WL pohovoru</span></div>
+          <div><strong>64</strong><span>Míst pro hráče</span></div>
+          <div><strong>CZ / SK</strong><span>Jazyk serveru</span></div>
         </div>
       </div>
     </section>
 
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
-        <div class="ticker-item">Realistický RolePlay</div><div class="ticker-item">Vlastní systémy</div><div class="ticker-item">Aktivní admin tým</div><div class="ticker-item">WL-OFF</div><div class="ticker-item">CZ / SK komunita</div>
-        <div class="ticker-item">Realistický RolePlay</div><div class="ticker-item">Vlastní systémy</div><div class="ticker-item">Aktivní admin tým</div><div class="ticker-item">WL-OFF</div><div class="ticker-item">CZ / SK komunita</div>
+        <div class="ticker-item">WL-OFF</div><div class="ticker-item">64 slotů</div><div class="ticker-item">CZ / SK</div><div class="ticker-item">Vlastní systémy</div><div class="ticker-item">Server ve vývoji</div>
+        <div class="ticker-item">WL-OFF</div><div class="ticker-item">64 slotů</div><div class="ticker-item">CZ / SK</div><div class="ticker-item">Vlastní systémy</div><div class="ticker-item">Server ve vývoji</div>
       </div>
     </div>
 
@@ -471,17 +471,17 @@
       <div class="container intro-grid">
         <div class="portal-card reveal">
           <div class="portal-ring"></div><div class="portal-floor"></div>
-          <img class="showcase-logo" src="assets/utopie-logo.png" alt="Utopie RolePlay">
-          <div class="card-label"><strong>Vstup do Utopie</strong><span>utopierp.fun</span></div>
+          <img class="showcase-logo" src="assets/utopie-avatar.png" alt="Logo Utopie RolePlay">
+          <div class="card-label"><strong>Aktuálně ve vývoji</strong><span>utopierp.fun</span></div>
         </div>
         <div class="reveal">
-          <p class="eyebrow">Kdo jsme</p>
-          <h2>Server, který sami chceme hrát.</h2>
-          <p class="section-copy">Jsme parta lidí, které baví FiveM a dobré příběhy. Utopii tvoříme tak, aby se tu nováček necítil ztracený a zkušený hráč měl pořád co objevovat. Bez zbytečného chaosu, protekce a hraní si na dokonalost.</p>
+          <p class="eyebrow">O serveru</p>
+          <h2>Co vlastně děláme?</h2>
+          <p class="section-copy">Jsme menší tým hráčů a vývojářů. Nechceme slibovat nejlepší server na scéně ještě před spuštěním. Chceme udělat místo, kde bude RP dávat smysl, noví hráči dostanou šanci a problémy se budou řešit normálně.</p>
           <div class="feature-list">
-            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 7v5c0 4.8 3.4 7.8 8 9 4.6-1.2 8-4.2 8-9V7l-8-4Z" stroke="currentColor" stroke-width="1.7"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7"/></svg></div><div><strong>Bez protekce</strong><span>Stejná pravidla platí pro hráče, frakce i náš tým.</span></div></div>
-            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M8 9h8m-8 4h5m-7 7 2.4-3H18a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3v3Z" stroke="currentColor" stroke-width="1.7"/></svg></div><div><strong>Hráči nejsou čísla</strong><span>Čteme zpětnou vazbu a dobré nápady opravdu řešíme.</span></div></div>
-            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4m0 12v4M4.9 4.9l2.8 2.8m8.6 8.6 2.8 2.8M2 12h4m12 0h4M4.9 19.1l2.8-2.8m8.6-8.6 2.8-2.8" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/></svg></div><div><strong>Vývoj, který je vidět</strong><span>Vlastní systémy ladíme podle toho, jak se skutečně hrají.</span></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 7v5c0 4.8 3.4 7.8 8 9 4.6-1.2 8-4.2 8-9V7l-8-4Z" stroke="currentColor" stroke-width="1.7"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7"/></svg></div><div><strong>WL-OFF, ne bez pravidel</strong><span>Pohovor nepotřebuješ. Pravidla ale platí pro všechny stejně.</span></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M8 9h8m-8 4h5m-7 7 2.4-3H18a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3v3Z" stroke="currentColor" stroke-width="1.7"/></svg></div><div><strong>Jsme na Discordu</strong><span>Tam dáváme novinky a tam s námi můžeš řešit nápady i problémy.</span></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4m0 12v4M4.9 4.9l2.8 2.8m8.6 8.6 2.8 2.8M2 12h4m12 0h4M4.9 19.1l2.8-2.8m8.6-8.6 2.8-2.8" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/></svg></div><div><strong>Vlastní systémy</strong><span>Co nám v běžném FiveM chybí, zkoušíme vytvořit nebo upravit sami.</span></div></div>
           </div>
         </div>
       </div>
@@ -489,27 +489,27 @@
 
     <section class="stats-wrap">
       <div class="container stats reveal">
-        <div class="stat"><small>Režim serveru</small><strong>WL<em>-OFF</em></strong><p>Přijdeš a hraješ</p></div>
-        <div class="stat"><small>Kapacita města</small><strong>64</strong><p>hráčských slotů</p></div>
-        <div class="stat"><small>Aktuální fáze</small><strong>WIP</strong><p>vývoj v plném proudu</p></div>
-        <div class="stat"><small>Jazyk</small><strong>CZ<em>/</em>SK</strong><p>česko-slovenský server</p></div>
+        <div class="stat"><small>Režim serveru</small><strong>WL<em>-OFF</em></strong><p>bez WL pohovoru</p></div>
+        <div class="stat"><small>Kapacita serveru</small><strong>64</strong><p>míst pro hráče</p></div>
+        <div class="stat"><small>Aktuální stav</small><strong>WIP</strong><p>server zatím stavíme</p></div>
+        <div class="stat"><small>Domluvíš se</small><strong>CZ<em>/</em>SK</strong><p>česky i slovensky</p></div>
       </div>
     </section>
 
     <section class="team" id="vedeni">
       <div class="container">
         <div class="section-head reveal">
-          <div><p class="eyebrow">Lidé za projektem</p><h2>Kdo stojí za Utopií?</h2></div>
-          <p class="section-copy">Utopie není anonymní projekt. Za serverem stojí lidé, kteří mu dávají směr a společně s týmem řeší jeho každodenní fungování.</p>
+          <div><p class="eyebrow">Kdo to dělá</p><h2>Vedení serveru</h2></div>
+          <p class="section-copy">Nejsme anonymní značka. Tohle jsou dva lidé, kteří za Utopii odpovídají a se kterými se potkáš i na našem Discordu.</p>
         </div>
         <div class="team-grid">
           <article class="owner-card founder reveal">
             <div class="owner-photo-wrap"><img class="owner-photo dexyn" src="assets/dexyn.png" alt="Profilová fotografie Dexyna"></div>
-            <div class="owner-info"><span class="owner-role">Founder · Majitel projektu</span><h3>Dexyn</h3><p>Zakladatel Utopie RP. Drží původní myšlenku projektu a společně s developerami drží server na nohou.</p></div>
+            <div class="owner-info"><span class="owner-role">Founder · Majitel projektu</span><h3>Dexyn</h3><p>Utopii založil a spolu s developery řeší, jak bude server fungovat a kam se bude dál posouvat.</p></div>
           </article>
           <article class="owner-card reveal">
             <div class="owner-photo-wrap"><img class="owner-photo kukusakr" src="assets/kukusakr.png" alt="Profilová fotografie kukusáka"></div>
-            <div class="owner-info"><span class="owner-role">CEO · Spolumajitel projektu</span><h3>kukusakr</h3><p>Stará se o vedení projektu a o to, aby se nápady nezastavily jen u slov. Pomáhá držet vývoj, tým i komunitu pohromadě.</p></div>
+            <div class="owner-info"><span class="owner-role">CEO · Spolumajitel projektu</span><h3>kukusakr</h3><p>Řeší běžný chod projektu, domlouvá práci v týmu a hlídá, aby se domluvené věci opravdu dotáhly.</p></div>
           </article>
         </div>
       </div>
@@ -517,18 +517,18 @@
 
     <section class="steps" id="jak-zacit">
       <div class="container">
-        <div class="section-head reveal"><div><p class="eyebrow">Žádná věda</p><h2>Jak se dostat do města?</h2></div><p class="section-copy">Whitelist pohovor u nás nepotřebuješ. Přijď na Discord, mrkni na pravidla a až otevřeme, můžeš rovnou hrát.</p></div>
+        <div class="section-head reveal"><div><p class="eyebrow">Jak začít</p><h2>Chceš si zahrát?</h2></div><p class="section-copy">Whitelist pohovor dělat nemusíš. Než server spustíme, stačí být na Discordu, projít ověřením a přečíst si pravidla.</p></div>
         <div class="steps-grid">
-          <article class="step-card reveal"><div class="step-num">01</div><h3>Stav se na Discordu</h3><p>Ověř se, pozdrav komunitu a sleduj oznámení. Vše důležité dáváme právě tam.</p></article>
-          <article class="step-card reveal"><div class="step-num">02</div><h3>Mrkni na pravidla</h3><p>Není potřeba se je učit nazpaměť. Hlavní je chápat, že společně tvoříme příběh, ne deathmatch.</p></article>
-          <article class="step-card reveal"><div class="step-num">03</div><h3>Přines dobrou postavu</h3><p>Nemusí mít deset stran lore. Stačí uvěřitelné jméno, pár cílů a chuť reagovat na ostatní.</p></article>
+          <article class="step-card reveal"><div class="step-num">01</div><h3>Přijď na Discord</h3><p>Proveď ověření a sleduj oznámení. Termín spuštění i testování dáme vědět právě tam.</p></article>
+          <article class="step-card reveal"><div class="step-num">02</div><h3>Přečti si pravidla</h3><p>Nemusíš je odříkat zpaměti. Potřebujeme ale, abys věděl, co je metagaming, FearRP nebo RDM.</p></article>
+          <article class="step-card reveal"><div class="step-num">03</div><h3>Vymysli si postavu</h3><p>Stačí normální jméno, základní příběh a představa, co chce tvoje postava ve městě dělat.</p></article>
         </div>
       </div>
     </section>
 
     <section class="rules" id="pravidla">
       <div class="container">
-        <div class="section-head reveal"><div><p class="eyebrow">Ať víme, na čem jsme</p><h2>Pravidla Utopie RP</h2></div><p class="section-copy">Nechceme chytat lidi za slovíčka. Pravidla drží hru fér a příjemnou pro všechny; každou situaci proto posuzujeme i podle kontextu a zdravého rozumu.</p></div>
+        <div class="section-head reveal"><div><p class="eyebrow">Než se připojíš</p><h2>Pravidla Utopie RP</h2></div><p class="section-copy">Pravidel je víc, protože chceme předejít zbytečným hádkám. Neřešíme každé přeřeknutí, ale úmyslné kazení hry ostatním tolerovat nebudeme.</p></div>
         <div class="rules-layout">
           <aside class="rules-side reveal">
             <strong>Kategorie</strong>
@@ -673,13 +673,13 @@
 
     <section class="faq" id="faq">
       <div class="container faq-grid">
-        <div class="reveal"><p class="eyebrow">Na co se ptáte nejčastěji</p><h2>Časté dotazy</h2><p class="section-copy">Něco tu chybí? Napiš nám normálně na Discordu nebo otevři ticket. Ozveme se, jakmile budeme moct.</p></div>
+        <div class="reveal"><p class="eyebrow">Rychlé odpovědi</p><h2>Časté dotazy</h2><p class="section-copy">Nenašel jsi odpověď? Zeptej se na Discordu nebo otevři ticket. Nemusíš psát sloh, stačí stručně popsat, co potřebuješ.</p></div>
         <div class="faq-list reveal">
-          <details class="faq-item" open><summary>Potřebuji whitelist?</summary><p>Ne. Utopie RP funguje v režimu WL-OFF, takže neabsolvuješ pohovor. Musíš však být ověřený/á na Discordu, nemít blacklist a dodržovat pravidla.</p></details>
-          <details class="faq-item"><summary>Je server už spuštěný?</summary><p>Zatím je ve fázi vývoje. Na Discordu zveřejňujeme novinky, ukázky systémů a termíny testování.</p></details>
-          <details class="faq-item"><summary>Mohu založit frakci nebo podnik?</summary><p>Ano, kvalitní nápady vítáme. Připrav stručný koncept, cíle frakce a způsob, jakým obohatí RP ostatních, a pošli ho přes ticket.</p></details>
-          <details class="faq-item"><summary>Co dělat, když narazím na bug?</summary><p>Bug nezneužívej a co nejdříve ho nahlas v ticketu. Přilož popis, postup, screenshot nebo video, pokud je máš.</p></details>
-          <details class="faq-item"><summary>Jak se odvolám proti trestu?</summary><p>Vytvoř ticket, popiš situaci věcně a přilož důkazy. Odvolání řeší jiný člen týmu, pokud je to možné.</p></details>
+          <details class="faq-item" open><summary>Potřebuji whitelist?</summary><p>Ne. Máme WL-OFF, takže žádný pohovor dělat nebudeš. Potřebuješ jen ověřený Discord, čistý blacklist a přečtená pravidla.</p></details>
+          <details class="faq-item"><summary>Je server už spuštěný?</summary><p>Ještě ne, pořád na něm pracujeme. Až budeme znát datum spuštění nebo testu, oznámíme ho na Discordu.</p></details>
+          <details class="faq-item"><summary>Mohu založit frakci nebo podnik?</summary><p>Ano. Napiš nám, co chceš hrát, jak si to představuješ a co to přinese ostatním hráčům. Nemusí to být profesionální prezentace.</p></details>
+          <details class="faq-item"><summary>Co mám dělat, když najdu chybu?</summary><p>Nezkoušej ji zneužít. Otevři ticket a pošli krátký popis, případně screenshot nebo video. Čím přesnější informace dostaneme, tím rychleji ji najdeme.</p></details>
+          <details class="faq-item"><summary>Jak se odvolám proti trestu?</summary><p>Otevři ticket, popiš situaci bez nadávek a přilož celý záznam, pokud ho máš. Odvolání se pokusí zkontrolovat někdo jiný než člověk, který trest udělil.</p></details>
         </div>
       </div>
     </section>
@@ -687,9 +687,9 @@
     <section class="cta-section" id="pripojit">
       <div class="container">
         <div class="cta-card reveal">
-          <p class="eyebrow">Brána se otevírá</p>
-          <h2>Tak co, potkáme se ve městě?</h2>
-          <p>Přidej se na náš Discord a buď u toho od začátku. Uvidíš novinky z vývoje, poznáš komunitu a nic důležitého ti neuteče.</p>
+          <p class="eyebrow">Utopie RP</p>
+          <h2>Chceš být u spuštění?</h2>
+          <p>Přijď na Discord. Dáváme tam ukázky z vývoje, hledáme lidi na testování a později tam oznámíme i datum otevření serveru.</p>
           <div class="hero-actions">
             <a class="btn btn-primary discord-link" href="https://discord.gg/TkKKZeGv8b" target="_blank" rel="noopener">Připojit se na Discord</a>
             <button class="btn btn-ghost copy-connect" type="button" data-connect="connect utopierp.fun">Kopírovat connect příkaz</button>
