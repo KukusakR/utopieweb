@@ -1,1 +1,725 @@
-co meles ty pico
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090713">
+  <meta name="description" content="Utopie RP — československý FiveM RolePlay server s režimem WL-OFF, vlastními systémy a aktivní komunitou.">
+  <meta property="og:title" content="Utopie RP — Tvůj příběh začíná tady">
+  <meta property="og:description" content="Realistický CZ/SK RolePlay bez whitelist pohovoru. Připoj se do komunity Utopie RP.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://utopierp.fun">
+  <title>Utopie RP — FiveM RolePlay</title>
+  <link rel="icon" type="image/png" href="assets/utopie-avatar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #f7f7f2;
+      --muted: #aaa99f;
+      --bg: #070705;
+      --bg-2: #0e0e09;
+      --surface: rgba(22, 22, 15, .78);
+      --line: rgba(255, 229, 0, .12);
+      --violet: #ffe500;
+      --violet-2: #ffad00;
+      --cyan: #fffef4;
+      --pink: #ff8500;
+      --warning: #ffe500;
+      --radius: 24px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .34);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255, 229, 0, .14), transparent 27rem),
+        radial-gradient(circle at 94% 20%, rgba(255, 133, 0, .09), transparent 30rem),
+        var(--bg);
+      font-family: "DM Sans", system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+    body.menu-open { overflow: hidden; }
+    ::selection { background: var(--violet); color: white; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    img, svg { display: block; max-width: 100%; }
+
+    .container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 18px;
+      color: var(--violet);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 2px; background: currentColor; }
+    h1, h2, h3, .brand { font-family: "Outfit", sans-serif; }
+    h1, h2, h3, p { margin-top: 0; }
+    h2 { margin-bottom: 18px; font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: .98; letter-spacing: -.045em; }
+    .section-copy { max-width: 640px; color: var(--muted); font-size: 1.04rem; line-height: 1.75; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 42px; }
+    .section-head > * { margin-bottom: 0; }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      border-bottom: 1px solid transparent;
+      transition: .25s ease;
+    }
+    .site-header.scrolled {
+      border-color: var(--line);
+      background: rgba(9, 7, 19, .78);
+      backdrop-filter: blur(18px);
+    }
+    .nav { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-size: 1.08rem; font-weight: 800; letter-spacing: .05em; }
+    .brand-avatar { width: 44px; height: 44px; object-fit: cover; border: 1px solid rgba(255,229,0,.2); border-radius: 13px; box-shadow: 0 8px 24px rgba(255,193,0,.13); }
+    .brand-name { font: 800 1.03rem "Outfit", sans-serif; letter-spacing: .08em; }
+    .brand-name small { color: var(--violet); font-size: inherit; }
+    .brand-mark {
+      position: relative;
+      width: 36px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 11px;
+      background: linear-gradient(145deg, rgba(255,229,0,.28), rgba(255,133,0,.08));
+      box-shadow: inset 0 0 18px rgba(255,229,0,.12);
+      color: white;
+    }
+    .brand-mark svg { width: 21px; }
+    .brand small { color: var(--violet); font-size: inherit; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #d1cde0; font-size: .9rem; font-weight: 600; }
+    .nav-links > a:not(.nav-cta) { position: relative; }
+    .nav-links > a:not(.nav-cta)::after { content: ""; position: absolute; inset: auto 0 -8px; height: 2px; transform: scaleX(0); background: var(--violet); transition: transform .2s; }
+    .nav-links > a:hover::after { transform: scaleX(1); }
+    .nav-cta { padding: 11px 17px; border: 1px solid rgba(255,229,0,.42); border-radius: 12px; background: rgba(255,229,0,.1); color: #fff36b; }
+    .menu-toggle { display: none; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); place-items: center; cursor: pointer; }
+    .menu-toggle span, .menu-toggle::before, .menu-toggle::after { content: ""; width: 20px; height: 2px; background: white; transition: .2s; }
+
+    .hero {
+      position: relative;
+      min-height: 760px;
+      height: min(920px, 100svh);
+      display: grid;
+      align-items: center;
+      padding: 110px 0 52px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -3;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(9,7,19,.96) 0%, rgba(9,7,19,.76) 42%, rgba(9,7,19,.22) 72%, rgba(9,7,19,.7) 100%),
+        linear-gradient(0deg, #090713 0%, transparent 28%),
+        radial-gradient(ellipse at 76% 38%, rgba(255,229,0,.3), transparent 29%),
+        linear-gradient(135deg, #1e1c08 0%, #14130b 46%, #151006 100%);
+    }
+    .hero-grid {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      opacity: .22;
+      background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, transparent 0, black 30%, transparent 90%);
+      transform: perspective(500px) rotateX(64deg) scale(1.8) translateY(16%);
+      transform-origin: bottom;
+    }
+    .city {
+      position: absolute;
+      z-index: -1;
+      right: max(-40px, calc((100vw - 1240px)/2));
+      bottom: 8%;
+      width: min(59vw, 760px);
+      opacity: .8;
+      filter: drop-shadow(0 0 35px rgba(255,193,0,.16));
+    }
+    .moon {
+      position: absolute;
+      right: 12%;
+      top: 14%;
+      z-index: -2;
+      width: min(29vw, 340px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      box-shadow: 0 0 70px rgba(255,229,0,.18), 0 0 180px rgba(255,133,0,.1);
+      opacity: .86;
+      overflow: hidden;
+    }
+    .moon img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+    .hero-content { max-width: 720px; }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 9px 13px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 99px;
+      background: rgba(16,13,30,.66);
+      color: #d8d2e9;
+      font-size: .78rem;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
+    }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warning); box-shadow: 0 0 0 5px rgba(255,205,106,.1); }
+    .hero h1 { max-width: 700px; margin-bottom: 24px; font-size: clamp(4rem, 10vw, 8.4rem); line-height: .78; letter-spacing: -.065em; text-transform: uppercase; }
+    .hero h1 span { display: block; color: transparent; -webkit-text-stroke: 1.5px rgba(255,236,76,.72); text-shadow: 0 0 42px rgba(255,193,0,.16); }
+    .hero-copy { max-width: 570px; margin-bottom: 30px; color: #c1bbd1; font-size: clamp(1rem, 1.7vw, 1.15rem); line-height: 1.7; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 21px;
+      border: 0;
+      border-radius: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(135deg, var(--violet), #ff9d00); color: #111006; box-shadow: 0 14px 38px rgba(255,193,0,.22); }
+    .btn-primary:hover { box-shadow: 0 18px 48px rgba(255,193,0,.34); }
+    .btn-ghost { border: 1px solid rgba(255,255,255,.14); background: rgba(20,16,37,.64); backdrop-filter: blur(10px); }
+    .btn svg { width: 18px; height: 18px; }
+    .hero-meta { display: flex; gap: 28px; margin-top: 38px; }
+    .hero-meta div { position: relative; padding-left: 17px; }
+    .hero-meta div::before { content: ""; position: absolute; left: 0; top: 3px; bottom: 3px; width: 2px; background: linear-gradient(var(--violet), transparent); }
+    .hero-meta strong { display: block; margin-bottom: 2px; font-family: "Outfit"; font-size: 1.2rem; }
+    .hero-meta span { color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; }
+
+    .ticker { position: relative; overflow: hidden; border-block: 1px solid var(--line); background: #0c0c07; }
+    .ticker-track { width: max-content; display: flex; gap: 40px; padding: 15px 0; animation: ticker 28s linear infinite; }
+    .ticker-item { display: flex; align-items: center; gap: 40px; color: #bdb7cc; font: 700 .75rem "Outfit"; letter-spacing: .12em; text-transform: uppercase; }
+    .ticker-item::after { content: "✦"; color: var(--violet); }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    section { padding: 120px 0; }
+    .intro-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 76px; }
+    .portal-card {
+      position: relative;
+      min-height: 510px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 32px;
+      background:
+        linear-gradient(180deg, transparent 20%, rgba(8,7,17,.8) 100%),
+        radial-gradient(circle at 50% 40%, rgba(255,229,0,.16), transparent 30%),
+        linear-gradient(145deg, #211f08, #12100a);
+      box-shadow: var(--shadow);
+    }
+    .portal-ring { position: absolute; left: 50%; top: 43%; width: 285px; aspect-ratio: 1; transform: translate(-50%,-50%); border: 2px solid rgba(255,229,0,.72); border-radius: 50%; box-shadow: 0 0 30px rgba(255,229,0,.3), inset 0 0 35px rgba(255,168,0,.24), 0 0 100px rgba(255,229,0,.16); }
+    .portal-ring::before, .portal-ring::after { content: ""; position: absolute; border-radius: inherit; }
+    .portal-ring::before { inset: 14px; border: 1px dashed rgba(255,255,255,.46); animation: spin 18s linear infinite; }
+    .portal-ring::after { inset: 35px; background: radial-gradient(circle, rgba(255,255,255,.8), rgba(255,229,0,.42) 4%, rgba(255,133,0,.09) 32%, rgba(8,8,5,.88) 70%); box-shadow: inset 0 0 55px rgba(255,229,0,.13); }
+    .showcase-logo { position: absolute; z-index: 3; left: 50%; top: 42%; width: min(72%, 360px); transform: translate(-50%,-50%); filter: drop-shadow(0 18px 30px rgba(0,0,0,.55)); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .portal-floor { position: absolute; left: 50%; bottom: 0; width: 130%; height: 36%; transform: translateX(-50%) perspective(340px) rotateX(65deg); background-image: linear-gradient(rgba(255,229,0,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(255,229,0,.13) 1px, transparent 1px); background-size: 32px 32px; mask-image: linear-gradient(to top, black, transparent); }
+    .card-label { position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; justify-content: space-between; align-items: end; }
+    .card-label strong { font: 700 1.1rem "Outfit"; }
+    .card-label span { color: var(--violet); font-size: .76rem; font-weight: 700; }
+    .feature-list { display: grid; gap: 14px; margin-top: 34px; }
+    .feature { display: grid; grid-template-columns: 46px 1fr; gap: 15px; align-items: center; padding: 16px; border: 1px solid transparent; border-radius: 17px; transition: .2s; }
+    .feature:hover { border-color: var(--line); background: rgba(255,255,255,.025); transform: translateX(5px); }
+    .feature-icon { width: 46px; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid rgba(255,229,0,.24); border-radius: 14px; background: rgba(255,229,0,.07); color: var(--violet); }
+    .feature-icon svg { width: 21px; }
+    .feature strong { display: block; margin-bottom: 3px; font: 700 1rem "Outfit"; }
+    .feature span { color: var(--muted); font-size: .88rem; }
+
+    .stats-wrap { padding-top: 0; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(135deg, rgba(255,229,0,.065), rgba(255,133,0,.018)); overflow: hidden; }
+    .stat { position: relative; min-height: 162px; padding: 30px; display: flex; flex-direction: column; justify-content: end; border-right: 1px solid var(--line); }
+    .stat:last-child { border: 0; }
+    .stat small { margin-bottom: auto; color: var(--muted); font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .stat strong { font: 700 clamp(2rem, 4vw, 3.4rem) "Outfit"; letter-spacing: -.04em; }
+    .stat strong em { color: var(--violet); font-style: normal; }
+    .stat p { margin: 3px 0 0; color: var(--muted); font-size: .84rem; }
+
+    .steps { background: linear-gradient(180deg, transparent, rgba(255,229,0,.032), transparent); }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: step; }
+    .step-card { counter-increment: step; position: relative; min-height: 270px; padding: 28px; overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); }
+    .step-card::after { content: "0" counter(step); position: absolute; right: -8px; bottom: -35px; color: rgba(255,255,255,.035); font: 800 8.5rem "Outfit"; }
+    .step-num { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 42px; border-radius: 13px; background: var(--violet); font: 800 .9rem "Outfit"; }
+    .step-card:nth-child(2) .step-num { background: var(--cyan); color: #111006; }
+    .step-card:nth-child(3) .step-num { background: var(--pink); }
+    .step-card h3 { margin-bottom: 10px; font-size: 1.35rem; }
+    .step-card p { position: relative; z-index: 1; margin: 0; color: var(--muted); line-height: 1.65; }
+
+    .rules { position: relative; }
+    .rules-layout { display: grid; grid-template-columns: 280px 1fr; gap: 26px; align-items: start; }
+    .rules-side { position: sticky; top: 100px; padding: 20px; border: 1px solid var(--line); border-radius: 20px; background: rgba(16,16,10,.78); backdrop-filter: blur(14px); }
+    .rules-side strong { display: block; margin: 0 0 13px 4px; font: 700 .78rem "Outfit"; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .rule-nav { display: grid; gap: 3px; }
+    .rule-nav button { width: 100%; padding: 11px 12px; border: 0; border-radius: 10px; background: transparent; color: #aaa5bb; text-align: left; cursor: pointer; transition: .2s; }
+    .rule-nav button:hover, .rule-nav button.active { color: #fff36b; background: rgba(255,229,0,.085); }
+    .rules-main { min-width: 0; }
+    .search-wrap { position: relative; margin-bottom: 18px; }
+    .search-wrap svg { position: absolute; left: 18px; top: 50%; width: 19px; transform: translateY(-50%); color: var(--muted); }
+    .rule-search { width: 100%; height: 58px; padding: 0 46px 0 50px; border: 1px solid var(--line); border-radius: 16px; outline: 0; background: rgba(255,255,255,.035); color: white; transition: .2s; }
+    .rule-search:focus { border-color: rgba(255,229,0,.5); box-shadow: 0 0 0 4px rgba(255,229,0,.065); }
+    .rule-search::placeholder { color: #777187; }
+    .search-count { position: absolute; right: 17px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: .72rem; }
+    .rule-groups { display: grid; gap: 12px; }
+    .rule-group { border: 1px solid var(--line); border-radius: 18px; background: rgba(18,18,12,.76); overflow: hidden; }
+    .rule-group[hidden] { display: none; }
+    .rule-group summary { position: relative; min-height: 74px; padding: 0 58px 0 22px; display: flex; align-items: center; gap: 14px; cursor: pointer; list-style: none; font: 700 1.05rem "Outfit"; }
+    .rule-group summary::-webkit-details-marker { display: none; }
+    .rule-group summary::after { content: "+"; position: absolute; right: 22px; color: var(--violet); font-size: 1.5rem; font-weight: 400; transition: .2s; }
+    .rule-group[open] summary::after { transform: rotate(45deg); }
+    .rule-index { width: 34px; height: 34px; display: grid; place-items: center; flex: none; border-radius: 9px; background: rgba(255,229,0,.09); color: #ffe934; font-size: .72rem; }
+    .rule-content { padding: 0 24px 26px 72px; color: #bbb6c9; line-height: 1.65; }
+    .rule-content h4 { margin: 22px 0 8px; color: white; font-size: .93rem; }
+    .rule-content p { margin-bottom: 12px; }
+    .rule-content ul { margin: 8px 0 0; padding-left: 19px; }
+    .rule-content li { margin: 7px 0; padding-left: 3px; }
+    .rule-content li::marker { color: var(--violet); }
+    .rule-note { margin-top: 16px; padding: 14px 16px; border-left: 3px solid var(--violet); border-radius: 0 10px 10px 0; background: rgba(255,229,0,.045); color: #dfded2; }
+    mark { padding: 0 2px; background: rgba(255,205,106,.24); color: #fff4d4; border-radius: 3px; }
+    .no-results { display: none; padding: 40px; border: 1px dashed var(--line); border-radius: 18px; color: var(--muted); text-align: center; }
+    .no-results.visible { display: block; }
+
+    .faq { background: rgba(255,255,255,.012); }
+    .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; }
+    .faq-list { display: grid; gap: 10px; }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-item summary { position: relative; padding: 20px 42px 20px 0; list-style: none; cursor: pointer; font-weight: 700; }
+    .faq-item summary::after { content: "+"; position: absolute; right: 5px; color: var(--violet); font-size: 1.3rem; transition: .2s; }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item p { padding-right: 30px; color: var(--muted); line-height: 1.7; }
+
+    .cta-section { padding-bottom: 80px; }
+    .cta-card { position: relative; overflow: hidden; padding: 70px clamp(28px, 7vw, 80px); border: 1px solid rgba(255,229,0,.2); border-radius: 30px; background: linear-gradient(120deg, rgba(105,84,0,.97), rgba(115,55,0,.96) 43%, rgba(21,18,6,.98) 78%); box-shadow: var(--shadow); }
+    .cta-card::before { content: ""; position: absolute; width: 400px; aspect-ratio: 1; right: -100px; top: -160px; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; box-shadow: 0 0 0 40px rgba(255,255,255,.025), 0 0 0 80px rgba(255,255,255,.02); }
+    .cta-card h2 { max-width: 670px; margin-bottom: 16px; font-size: clamp(2.5rem, 6vw, 5rem); }
+    .cta-card p { max-width: 550px; margin-bottom: 28px; color: rgba(255,255,255,.82); line-height: 1.7; }
+    .cta-card .eyebrow { color: white; }
+    .cta-card .btn-primary { background: #090905; color: white; box-shadow: none; }
+
+    footer { padding: 34px 0 44px; border-top: 1px solid var(--line); }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 25px; color: var(--muted); font-size: .83rem; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a:hover { color: white; }
+
+    .toast { position: fixed; z-index: 90; left: 50%; bottom: 28px; padding: 13px 17px; border: 1px solid rgba(255,229,0,.28); border-radius: 12px; background: rgba(27,25,7,.94); color: #fff8a6; transform: translate(-50%, 130px); opacity: 0; transition: .35s; box-shadow: var(--shadow); }
+    .toast.show { transform: translate(-50%, 0); opacity: 1; }
+    .reveal { opacity: 0; transform: translateY(25px); transition: opacity .65s, transform .65s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .menu-toggle { display: grid; }
+      .nav-links { position: fixed; inset: 76px 16px auto; display: grid; gap: 8px; padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: rgba(12,9,23,.97); box-shadow: var(--shadow); transform: translateY(-20px); opacity: 0; visibility: hidden; transition: .2s; }
+      .menu-open .nav-links { transform: none; opacity: 1; visibility: visible; }
+      .nav-links a { padding: 12px; }
+      .nav-cta { text-align: center; }
+      .intro-grid, .faq-grid { grid-template-columns: 1fr; gap: 46px; }
+      .portal-card { min-height: 440px; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step-card { min-height: 220px; }
+      .step-num { margin-bottom: 28px; }
+      .rules-layout { grid-template-columns: 1fr; }
+      .rules-side { position: static; overflow-x: auto; }
+      .rule-nav { display: flex; width: max-content; }
+      .rule-nav button { width: auto; white-space: nowrap; }
+      .city { width: 82vw; right: -20%; opacity: .35; }
+      .moon { width: 48vw; right: -5%; }
+    }
+    @media (max-width: 600px) {
+      .container { width: min(100% - 28px, 1160px); }
+      .brand-avatar { width: 40px; height: 40px; border-radius: 11px; }
+      .brand-name { font-size: .94rem; }
+      section { padding: 88px 0; }
+      .hero { min-height: 740px; height: 100svh; padding-top: 100px; }
+      .hero h1 { font-size: clamp(3.75rem, 19vw, 5.8rem); }
+      .hero-copy { max-width: 92%; }
+      .hero-actions .btn { width: 100%; }
+      .hero-meta { gap: 14px; }
+      .hero-meta div { flex: 1; }
+      .hero-meta strong { font-size: 1rem; }
+      .hero-meta span { font-size: .65rem; }
+      .section-head { display: block; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { min-height: 135px; border-right: 0; border-bottom: 1px solid var(--line) !important; }
+      .stat:last-child { border-bottom: 0 !important; }
+      .rule-content { padding-left: 24px; }
+      .rule-group summary { padding-left: 16px; }
+      .cta-card { border-radius: 22px; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container nav">
+      <a class="brand" href="#domu" aria-label="Utopie RP — domů">
+        <img class="brand-avatar" src="assets/utopie-avatar.png" alt="">
+        <span class="brand-name">UTOPIE <small>RP</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Hlavní navigace">
+        <a href="#o-serveru">O serveru</a>
+        <a href="#jak-zacit">Jak začít</a>
+        <a href="#pravidla">Pravidla</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#pripojit">Připojit se</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-label="Otevřít menu" aria-expanded="false"><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="domu">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="moon" aria-hidden="true"><img src="assets/utopie-mark.png" alt=""></div>
+      <svg class="city" viewBox="0 0 800 430" aria-hidden="true">
+        <defs><linearGradient id="building" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#332f09"/><stop offset="1" stop-color="#080805"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+        <g fill="url(#building)" stroke="#c9ac00" stroke-opacity=".35">
+          <path d="M20 430V280h88v150M118 430V205h110v225M240 430V250h76v180M330 430V150h122v280M463 430V232h96v198M571 430V180h83v250M667 430V265h114v165"/>
+          <path d="M360 150v-35h62v35M381 115V58h19v57M590 180v-32h46v32M186 205v-39h20v39"/>
+        </g>
+        <g fill="#ffe500" opacity=".58" filter="url(#glow)">
+          <path d="M42 305h8v9h-8zm22 0h8v9h-8zm22 0h8v9h-8zm54-72h9v9h-9zm26 0h9v9h-9zm26 0h9v9h-9zm65 45h8v10h-8zm25 0h8v10h-8zm75-87h10v11h-10zm29 0h10v11h-10zm29 0h10v11h-10zm72 68h9v10h-9zm28 0h9v10h-9zm75-51h8v10h-8zm25 0h8v10h-8zm72 83h10v10h-10zm30 0h10v10h-10z"/>
+        </g>
+        <path d="M0 430h800" stroke="#ffb000" stroke-width="3" opacity=".7"/>
+      </svg>
+      <div class="container hero-content">
+        <div class="status-pill"><span class="status-dot"></span> Na serveru právě makáme</div>
+        <h1>MĚSTO, KTERÉ <span>TVOŘÍME SPOLU.</span></h1>
+        <p class="hero-copy">Utopii stavíme jako server, na který se sami chceme každý večer vracet. Poctivé RP, normální lidi a tým, který hráčům opravdu naslouchá.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#pripojit">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 12h8m-4-4 4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+            Chci být u toho
+          </a>
+          <a class="btn btn-ghost" href="#pravidla">Prozkoumat pravidla</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>WL-OFF</strong><span>Bez pohovoru</span></div>
+          <div><strong>64</strong><span>Slotů</span></div>
+          <div><strong>CZ / SK</strong><span>Komunita</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-item">Realistický RolePlay</div><div class="ticker-item">Vlastní systémy</div><div class="ticker-item">Aktivní admin tým</div><div class="ticker-item">WL-OFF</div><div class="ticker-item">CZ / SK komunita</div>
+        <div class="ticker-item">Realistický RolePlay</div><div class="ticker-item">Vlastní systémy</div><div class="ticker-item">Aktivní admin tým</div><div class="ticker-item">WL-OFF</div><div class="ticker-item">CZ / SK komunita</div>
+      </div>
+    </div>
+
+    <section id="o-serveru">
+      <div class="container intro-grid">
+        <div class="portal-card reveal">
+          <div class="portal-ring"></div><div class="portal-floor"></div>
+          <img class="showcase-logo" src="assets/utopie-logo.png" alt="Utopie RolePlay">
+          <div class="card-label"><strong>Vstup do Utopie</strong><span>utopierp.fun</span></div>
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">Kdo jsme</p>
+          <h2>Server, který sami chceme hrát.</h2>
+          <p class="section-copy">Jsme parta lidí, které baví FiveM a dobré příběhy. Utopii tvoříme tak, aby se tu nováček necítil ztracený a zkušený hráč měl pořád co objevovat. Bez zbytečného chaosu, protekce a hraní si na dokonalost.</p>
+          <div class="feature-list">
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 7v5c0 4.8 3.4 7.8 8 9 4.6-1.2 8-4.2 8-9V7l-8-4Z" stroke="currentColor" stroke-width="1.7"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7"/></svg></div><div><strong>Bez protekce</strong><span>Stejná pravidla platí pro hráče, frakce i náš tým.</span></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M8 9h8m-8 4h5m-7 7 2.4-3H18a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3v3Z" stroke="currentColor" stroke-width="1.7"/></svg></div><div><strong>Hráči nejsou čísla</strong><span>Čteme zpětnou vazbu a dobré nápady opravdu řešíme.</span></div></div>
+            <div class="feature"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2v4m0 12v4M4.9 4.9l2.8 2.8m8.6 8.6 2.8 2.8M2 12h4m12 0h4M4.9 19.1l2.8-2.8m8.6-8.6 2.8-2.8" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/></svg></div><div><strong>Vývoj, který je vidět</strong><span>Vlastní systémy ladíme podle toho, jak se skutečně hrají.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-wrap">
+      <div class="container stats reveal">
+        <div class="stat"><small>Režim serveru</small><strong>WL<em>-OFF</em></strong><p>Přijdeš a hraješ</p></div>
+        <div class="stat"><small>Kapacita města</small><strong>64</strong><p>hráčských slotů</p></div>
+        <div class="stat"><small>Aktuální fáze</small><strong>WIP</strong><p>vývoj v plném proudu</p></div>
+        <div class="stat"><small>Jazyk</small><strong>CZ<em>/</em>SK</strong><p>česko-slovenský server</p></div>
+      </div>
+    </section>
+
+    <section class="steps" id="jak-zacit">
+      <div class="container">
+        <div class="section-head reveal"><div><p class="eyebrow">Žádná věda</p><h2>Jak se dostat do města?</h2></div><p class="section-copy">Whitelist pohovor u nás nepotřebuješ. Přijď na Discord, mrkni na pravidla a až otevřeme, můžeš rovnou hrát.</p></div>
+        <div class="steps-grid">
+          <article class="step-card reveal"><div class="step-num">01</div><h3>Stav se na Discordu</h3><p>Ověř se, pozdrav komunitu a sleduj oznámení. Vše důležité dáváme právě tam.</p></article>
+          <article class="step-card reveal"><div class="step-num">02</div><h3>Mrkni na pravidla</h3><p>Není potřeba se je učit nazpaměť. Hlavní je chápat, že společně tvoříme příběh, ne deathmatch.</p></article>
+          <article class="step-card reveal"><div class="step-num">03</div><h3>Přines dobrou postavu</h3><p>Nemusí mít deset stran lore. Stačí uvěřitelné jméno, pár cílů a chuť reagovat na ostatní.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="rules" id="pravidla">
+      <div class="container">
+        <div class="section-head reveal"><div><p class="eyebrow">Ať víme, na čem jsme</p><h2>Pravidla Utopie RP</h2></div><p class="section-copy">Nechceme chytat lidi za slovíčka. Pravidla drží hru fér a příjemnou pro všechny; každou situaci proto posuzujeme i podle kontextu a zdravého rozumu.</p></div>
+        <div class="rules-layout">
+          <aside class="rules-side reveal">
+            <strong>Kategorie</strong>
+            <nav class="rule-nav" aria-label="Kategorie pravidel">
+              <button class="active" type="button" data-rule="all">Všechna pravidla</button>
+              <button type="button" data-rule="zaklady">Základy</button>
+              <button type="button" data-rule="rp">RP pojmy</button>
+              <button type="button" data-rule="postavy">Postavy</button>
+              <button type="button" data-rule="akce">Akce a kriminalita</button>
+              <button type="button" data-rule="vozidla">Vozidla</button>
+              <button type="button" data-rule="technika">Technická pravidla</button>
+            </nav>
+          </aside>
+          <div class="rules-main reveal">
+            <div class="search-wrap">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <input class="rule-search" type="search" placeholder="Hledat: metagaming, CK, únos…" aria-label="Hledat v pravidlech">
+              <span class="search-count">10 kapitol</span>
+            </div>
+            <div class="rule-groups">
+              <details class="rule-group" data-category="zaklady" open>
+                <summary><span class="rule-index">01</span>Základní pravidla komunity</summary>
+                <div class="rule-content">
+                  <ul>
+                    <li>Chovej se slušně k hráčům i členům týmu. Šikana, vyhrožování, nenávistné projevy, sexuální obtěžování a cílené urážky jsou zakázané.</li>
+                    <li>Je zakázané používat cheaty, makra, externí zaměřovače, upravené textury nebo jiné nástroje poskytující herní výhodu.</li>
+                    <li>Nevyužívej chyby hry nebo serveru. Nalezený bug neprodleně nahlas přes ticket a nezveřejňuj postup jeho zneužití.</li>
+                    <li>Reklama jiných projektů, prodej herních účtů a obchodování s IC majetkem za reálné peníze nejsou povoleny.</li>
+                    <li>Pokyny admin týmu jsou závazné. Nesouhlas řeš v klidu až po dokončení RP akce prostřednictvím ticketu.</li>
+                    <li>Jméno na Discordu musí být označitelné a nesmí obsahovat reklamu ani nevhodný obsah.</li>
+                  </ul>
+                  <div class="rule-note"><strong>WL-OFF neznamená „bez pravidel“.</strong> Do města se dostaneš bez pohovoru, ale kvalitu RP očekáváme od první minuty.</div>
+                </div>
+              </details>
+              <details class="rule-group" data-category="rp">
+                <summary><span class="rule-index">02</span>IC, OOC a herní komunikace</summary>
+                <div class="rule-content">
+                  <h4>IC — In Character</h4><p>Vše, co říká nebo dělá tvoje postava v herním světě. IC události se řeší IC způsobem.</p>
+                  <h4>OOC — Out of Character</h4><p>Komunikace mimo postavu. OOC informace nesmíš používat ve hře. Během RP akce nevyskakuj z role kvůli komentování pravidel.</p>
+                  <h4>Mixing</h4><p>Míchání IC a OOC světa je zakázané. Výrazy jako „spadla mi hlava“, „sval“ nebo „bohové“ nepoužívej jako náhradu normálního IC vyjadřování.</p>
+                  <h4>/me a /do</h4><ul><li><strong>/me</strong> popisuje činnost, kterou animace neumí zobrazit: <em>/me vytahuje obvaz z kapsy.</em></li><li><strong>/do</strong> popisuje stav nebo ověřitelný výsledek. Odpověď musí být pravdivá a nesmíš přes /do vnucovat akci druhému hráči.</li><li><strong>/try</strong> používej jen pro skutečně náhodný výsledek, nikdy k obcházení schopností postavy nebo pravidel.</li></ul>
+                </div>
+              </details>
+              <details class="rule-group" data-category="rp">
+                <summary><span class="rule-index">03</span>Metagaming, Powergaming a FearRP</summary>
+                <div class="rule-content">
+                  <h4>Metagaming</h4><p>Je použití informace získané mimo hru — například ze streamu, Discordu nebo od kamaráda — ve prospěch postavy. Během hraní nesmíš být na externím hovoru s dalšími hráči ve městě.</p>
+                  <h4>Powergaming</h4><p>Je provádění nereálných úkonů nebo vnucování výsledku jiné postavě bez možnosti reakce. Schopnosti i vybavení postavy musí dávat smysl.</p>
+                  <h4>FearRP / NVL</h4><p>Postava si váží života, zdraví, svobody i majetku. Pokud na tebe někdo míří a má situaci pod kontrolou, musíš projevit odpovídající strach. Bezhlavý útok proti přesile je porušení NVL.</p>
+                  <h4>PassiveRP</h4><p>Svět není prázdný jen proto, že kolem nejsou hráči nebo NPC. Na frekventovaných místech, u státních budov, nemocnice, policejních stanic nebo obchodů počítej se svědky a kamerami.</p>
+                </div>
+              </details>
+              <details class="rule-group" data-category="rp">
+                <summary><span class="rule-index">04</span>RDM, VDM, KOS a zranění</summary>
+                <div class="rule-content">
+                  <ul>
+                    <li><strong>RDM:</strong> napadení nebo zabití bez předchozí smysluplné RP interakce a důvodu je zakázané.</li>
+                    <li><strong>VDM:</strong> použití vozidla jako zbraně bez odpovídajícího RP důvodu je zakázané.</li>
+                    <li><strong>KOS:</strong> střelba na první pohled je povolená pouze tehdy, pokud bezprostředně navazuje na jasně rozehranou akci a obě strany vědí, proč konflikt probíhá.</li>
+                    <li><strong>Injuries:</strong> zranění hraj podle závažnosti. Po velké nehodě, pádu nebo střelbě nemůžeš bez následků utéct či pokračovat v běžné činnosti.</li>
+                    <li><strong>Combat comeback:</strong> po vyřazení se do stejné akce nevracej a nepředávej spoluhráčům čerstvé informace.</li>
+                  </ul>
+                </div>
+              </details>
+              <details class="rule-group" data-category="postavy">
+                <summary><span class="rule-index">05</span>Postavy, lore, PK a CK</summary>
+                <div class="rule-content">
+                  <h4>Tvorba postavy</h4><ul><li>Postava musí mít uvěřitelné jméno, věk minimálně 18 let a stručný příběh odpovídající jejím schopnostem.</li><li>Nepoužívej jména známých osobností, troll jména ani postavy založené na nenávistných stereotypech.</li><li>Vývoj postavy musí být postupný. Z kriminálníka se nestane během jednoho dne velitel policie.</li><li>Majetek ani informace mezi vlastními postavami nepřenášej.</li></ul>
+                  <h4>PK — Player Kill</h4><p>Dočasné vyřazení postavy. Po probuzení si nepamatuješ bezprostřední okolnosti, které vedly k úplnému bezvědomí, a nesmíš se okamžitě mstít.</p>
+                  <h4>CK — Character Kill</h4><p>Trvalý konec postavy a jejího majetku. Vynucené CK musí mít závažný, dlouhodobě budovaný důvod a předchozí schválení vedením přes ticket. CK neslouží k získání cizího majetku.</p>
+                </div>
+              </details>
+              <details class="rule-group" data-category="akce">
+                <summary><span class="rule-index">06</span>Kriminalita, únosy a vykrádání</summary>
+                <div class="rule-content">
+                  <ul>
+                    <li>Každá kriminální akce musí mít příběh a přiměřený důvod. Náhodné únosy, okrádání nových hráčů nebo vyhledávání konfliktu s policií jsou FailRP.</li>
+                    <li>Unesenému nesmíš nutit výběr peněz z banky, sdělení PINu, převod vozidla, firmy nebo jiného majetku.</li>
+                    <li>Únos drž v rozumné délce; bez OOC souhlasu všech účastníků maximálně 90 minut.</li>
+                    <li>Rukojmí při vykrádání musí být skutečný hráč zapojený do akce. Fiktivní „prodavač za pultem“ se nepočítá.</li>
+                    <li>Obě strany dávají prostor vyjednávání. Požadavky musí být realistické a proveditelné.</li>
+                    <li>GrossRP (extrémně násilný nebo nechutný obsah) je možné pouze s výslovným OOC souhlasem všech účastníků, který lze kdykoli odvolat. Sexuální RP je zakázané.</li>
+                    <li>Větší plánované akce nebo konflikty frakcí konzultuj předem přes ticket, pokud to stanoví oznámení admin týmu.</li>
+                  </ul>
+                </div>
+              </details>
+              <details class="rule-group" data-category="akce">
+                <summary><span class="rule-index">07</span>Frakce a státní složky</summary>
+                <div class="rule-content">
+                  <ul>
+                    <li>Členové legálních i nelegálních frakcí reprezentují server a musí udržovat vyšší úroveň RP.</li>
+                    <li>Korupce ve státní složce, závažná zrada frakce nebo dlouhodobý konflikt musí být předem schváleny příslušným supportem.</li>
+                    <li>Bez příběhového důvodu nekradni služební vozidla a vybavení policie, EMS ani dalších složek.</li>
+                    <li>Frakční Discord nesmí sloužit k předávání IC informací během hry. Herní komunikace probíhá herními prostředky.</li>
+                    <li>Vedení frakce odpovídá za chování členů a za aktivní řešení opakovaných problémů.</li>
+                  </ul>
+                </div>
+              </details>
+              <details class="rule-group" data-category="vozidla">
+                <summary><span class="rule-index">08</span>Vozidla a NonRP Driving</summary>
+                <div class="rule-content">
+                  <ul>
+                    <li>Jezdi podle typu vozidla, povrchu, počasí a jeho aktuálního poškození. Sportovní auto není offroad a běžný vůz nepokračuje po těžkém pádu.</li>
+                    <li>Vážné nárazy a nehody je nutné odehrát. Během aktivního pronásledování lze drobné kontakty zjednodušit, ne však ignorovat velkou havárii.</li>
+                    <li>Je zakázané ukládat vozidlo do garáže, měnit ho za čerstvě vytažené nebo se odpojit s cílem ukončit probíhající honičku.</li>
+                    <li>Drive-by střelba, pit manévry a blokování vozidel musí být přiměřené situaci a nesmí sloužit jako bezmyšlenkovité PvP.</li>
+                    <li>Co fyzicky vezeš, musí odpovídat inventáři a možnostem vozidla. Dlouhou zbraň nebo objemný předmět nelze „vytáhnout z kapsy“.</li>
+                  </ul>
+                </div>
+              </details>
+              <details class="rule-group" data-category="technika">
+                <summary><span class="rule-index">09</span>Odpojení, pády hry a reporty</summary>
+                <div class="rule-content">
+                  <ul>
+                    <li><strong>Combat log:</strong> odpojení z probíhající RP akce je zakázané. Po pádu hry se vrať co nejdříve a informuj účastníky přes určený kanál.</li>
+                    <li>Pokud musíš nečekaně skončit, napiš /report a domluv ukončení nebo pokračování akce. Samotná časová tíseň není automatický důvod k odchodu.</li>
+                    <li>Report piš stručně a věcně. Uveď ID hráče, co se stalo a zda akce stále probíhá. Report nepoužívej k urážkám ani k vyjednávání výhody.</li>
+                    <li>Stížnosti podávej s vlastním, neupraveným videozáznamem ideálně včetně několika minut před událostí. Samotný sestříhaný klip nemusí stačit.</li>
+                    <li>RP akci vždy nejdříve dohraj. Výjimkou je cheatování, závažné obtěžování nebo situace, kdy pokračování představuje reálné riziko.</li>
+                  </ul>
+                </div>
+              </details>
+              <details class="rule-group" data-category="technika">
+                <summary><span class="rule-index">10</span>Streamování, záznamy a závěrečná ustanovení</summary>
+                <div class="rule-content">
+                  <ul>
+                    <li>Stream sniping a použití informací ze živého vysílání jsou metagaming a trestají se přísněji.</li>
+                    <li>Při vstupu na veřejný RP server počítej s tím, že se tvoje herní postava, hlas a RP situace mohou objevit ve streamu nebo záznamu jiného hráče.</li>
+                    <li>Nesdílej osobní údaje, soukromé konverzace ani obsah ticketů bez svolení vedení a dotčených osob.</li>
+                    <li>Admin tým může podle závažnosti uložit upozornění, kick, dočasný nebo trvalý ban. Opakované porušení se posuzuje přísněji.</li>
+                    <li>Pravidla mohou být aktualizována. Změny budou oznámeny na Discordu a platí od zveřejnění.</li>
+                  </ul>
+                  <div class="rule-note">Připojením na Utopie RP potvrzuješ, že jsi pravidla četl/a, rozumíš jim a souhlasíš s jejich dodržováním.</div>
+                </div>
+              </details>
+            </div>
+            <div class="no-results">Nic jsme nenašli. Zkus kratší výraz nebo jiný RP pojem.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container faq-grid">
+        <div class="reveal"><p class="eyebrow">Na co se ptáte nejčastěji</p><h2>Časté dotazy</h2><p class="section-copy">Něco tu chybí? Napiš nám normálně na Discordu nebo otevři ticket. Ozveme se, jakmile budeme moct.</p></div>
+        <div class="faq-list reveal">
+          <details class="faq-item" open><summary>Potřebuji whitelist?</summary><p>Ne. Utopie RP funguje v režimu WL-OFF, takže neabsolvuješ pohovor. Musíš však být ověřený/á na Discordu, nemít blacklist a dodržovat pravidla.</p></details>
+          <details class="faq-item"><summary>Je server už spuštěný?</summary><p>Zatím je ve fázi vývoje. Na Discordu zveřejňujeme novinky, ukázky systémů a termíny testování.</p></details>
+          <details class="faq-item"><summary>Mohu založit frakci nebo podnik?</summary><p>Ano, kvalitní nápady vítáme. Připrav stručný koncept, cíle frakce a způsob, jakým obohatí RP ostatních, a pošli ho přes ticket.</p></details>
+          <details class="faq-item"><summary>Co dělat, když narazím na bug?</summary><p>Bug nezneužívej a co nejdříve ho nahlas v ticketu. Přilož popis, postup, screenshot nebo video, pokud je máš.</p></details>
+          <details class="faq-item"><summary>Jak se odvolám proti trestu?</summary><p>Vytvoř ticket, popiš situaci věcně a přilož důkazy. Odvolání řeší jiný člen týmu, pokud je to možné.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="pripojit">
+      <div class="container">
+        <div class="cta-card reveal">
+          <p class="eyebrow">Brána se otevírá</p>
+          <h2>Tak co, potkáme se ve městě?</h2>
+          <p>Přidej se na náš Discord a buď u toho od začátku. Uvidíš novinky z vývoje, poznáš komunitu a nic důležitého ti neuteče.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary discord-link" href="https://discord.gg/TkKKZeGv8b" target="_blank" rel="noopener">Připojit se na Discord</a>
+            <button class="btn btn-ghost copy-connect" type="button" data-connect="connect utopierp.fun">Kopírovat connect příkaz</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <a class="brand" href="#domu"><img class="brand-avatar" src="assets/utopie-avatar.png" alt=""><span class="brand-name">UTOPIE <small>RP</small></span></a>
+      <span>© <span id="year"></span> Utopie RP — by kukusakr</span>
+      <div class="footer-links"><a href="#pravidla">Pravidla</a><a href="#faq">FAQ</a><a href="https://utopierp.fun">utopierp.fun</a></div>
+    </div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite">Příkaz zkopírován: connect utopierp.fun</div>
+
+  <script>
+    const header = document.querySelector('.site-header');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const search = document.querySelector('.rule-search');
+    const groups = [...document.querySelectorAll('.rule-group')];
+    const categoryButtons = document.querySelectorAll('[data-rule]');
+    const count = document.querySelector('.search-count');
+    const noResults = document.querySelector('.no-results');
+    let activeCategory = 'all';
+
+    const setHeader = () => header.classList.toggle('scrolled', scrollY > 20);
+    setHeader();
+    addEventListener('scroll', setHeader, { passive: true });
+
+    menuToggle.addEventListener('click', () => {
+      document.body.classList.toggle('menu-open');
+      menuToggle.setAttribute('aria-expanded', document.body.classList.contains('menu-open'));
+    });
+    navLinks.forEach(link => link.addEventListener('click', () => {
+      document.body.classList.remove('menu-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    const normalize = text => text.toLocaleLowerCase('cs').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    function filterRules() {
+      const term = normalize(search.value.trim());
+      let visible = 0;
+      groups.forEach(group => {
+        const categoryMatch = activeCategory === 'all' || group.dataset.category === activeCategory;
+        const textMatch = !term || normalize(group.textContent).includes(term);
+        const show = categoryMatch && textMatch;
+        group.hidden = !show;
+        if (show) { visible++; if (term) group.open = true; }
+      });
+      count.textContent = visible + (visible === 1 ? ' kapitola' : visible > 1 && visible < 5 ? ' kapitoly' : ' kapitol');
+      noResults.classList.toggle('visible', visible === 0);
+    }
+    search.addEventListener('input', filterRules);
+    categoryButtons.forEach(button => button.addEventListener('click', () => {
+      activeCategory = button.dataset.rule;
+      categoryButtons.forEach(item => item.classList.toggle('active', item === button));
+      filterRules();
+      if (innerWidth < 901) document.querySelector('.search-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }));
+
+    document.querySelector('.copy-connect').addEventListener('click', async event => {
+      const command = event.currentTarget.dataset.connect;
+      try {
+        await navigator.clipboard.writeText(command);
+      } catch {
+        const helper = document.createElement('textarea');
+        helper.value = command; document.body.appendChild(helper); helper.select(); document.execCommand('copy'); helper.remove();
+      }
+      const toast = document.querySelector('.toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
