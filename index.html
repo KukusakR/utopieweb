@@ -271,10 +271,12 @@
     }
     .owner-card::after { content: ""; position: absolute; right: -65px; bottom: -90px; width: 210px; aspect-ratio: 1; border: 1px solid rgba(255,229,0,.1); border-radius: 50%; box-shadow: 0 0 0 30px rgba(255,229,0,.018), 0 0 0 60px rgba(255,229,0,.012); }
     .owner-card.founder { border-color: rgba(255,229,0,.24); }
+    .owner-card.developer { grid-column: 1 / -1; width: calc(50% - 9px); justify-self: center; }
     .owner-photo-wrap { position: relative; z-index: 1; width: 142px; aspect-ratio: 1; padding: 3px; border-radius: 22px; background: linear-gradient(145deg, #fff, var(--violet) 52%, #ff8a00); box-shadow: 0 16px 40px rgba(0,0,0,.35); }
     .owner-photo { width: 100%; height: 100%; object-fit: cover; border: 4px solid #0d0d08; border-radius: 19px; background: #090905; }
     .owner-photo.kukusakr { object-position: 57% 38%; }
     .owner-photo.dexyn { object-fit: contain; padding: 12px; }
+    .owner-photo.merodico { object-fit: contain; padding: 10px; }
     .owner-info { position: relative; z-index: 1; }
     .owner-role { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; color: var(--violet); font-size: .7rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
     .owner-role::before { content: ""; width: 17px; height: 2px; background: currentColor; }
@@ -364,6 +366,7 @@
       .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
       .steps-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: 1fr; }
+      .owner-card.developer { grid-column: auto; width: 100%; }
       .step-card { min-height: 220px; }
       .step-num { margin-bottom: 28px; }
       .rules-layout { grid-template-columns: 1fr; }
@@ -500,7 +503,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div><p class="eyebrow">Kdo to dělá</p><h2>Vedení serveru</h2></div>
-          <p class="section-copy">Nejsme anonymní značka. Tohle jsou dva lidé, kteří za Utopii odpovídají a se kterými se potkáš i na našem Discordu.</p>
+          <p class="section-copy">Nejsme anonymní značka. Tohle jsou lidé, kteří se o Utopii starají a se kterými se potkáš i na našem Discordu.</p>
         </div>
         <div class="team-grid">
           <article class="owner-card founder reveal">
@@ -510,6 +513,10 @@
           <article class="owner-card reveal">
             <div class="owner-photo-wrap"><img class="owner-photo kukusakr" src="assets/kukusakr.png" alt="Profilová fotografie kukusáka"></div>
             <div class="owner-info"><span class="owner-role">CEO · Spolumajitel projektu</span><h3>kukusakr</h3><p>Řeší běžný chod projektu, domlouvá práci v týmu a hlídá, aby se domluvené věci opravdu dotáhly.</p></div>
+          </article>
+          <article class="owner-card developer reveal">
+            <div class="owner-photo-wrap"><img class="owner-photo merodico" src="assets/merodico.png" alt="Profilová fotografie Merodica"></div>
+            <div class="owner-info"><span class="owner-role">Founder · Developer</span><h3>Merodico</h3><p>Utopii pomáhal rozjet a většinu času tráví u skriptů a technické stránky serveru.</p></div>
           </article>
         </div>
       </div>
@@ -692,7 +699,7 @@
           <p>Přijď na Discord. Dáváme tam ukázky z vývoje, hledáme lidi na testování a později tam oznámíme i datum otevření serveru.</p>
           <div class="hero-actions">
             <a class="btn btn-primary discord-link" href="https://discord.gg/TkKKZeGv8b" target="_blank" rel="noopener">Připojit se na Discord</a>
-            <button class="btn btn-ghost copy-connect" type="button" data-connect="connect utopierp.fun">Kopírovat connect příkaz</button>
+            <button class="btn btn-ghost copy-connect" type="button" data-connect="connect play.utopierp.fun">Kopírovat příkaz pro připojení</button>
           </div>
         </div>
       </div>
@@ -707,7 +714,7 @@
     </div>
   </footer>
 
-  <div class="toast" role="status" aria-live="polite">Příkaz zkopírován: connect utopierp.fun</div>
+  <div class="toast" role="status" aria-live="polite">Příkaz zkopírován: connect play.utopierp.fun</div>
 
   <script>
     const header = document.querySelector('.site-header');
